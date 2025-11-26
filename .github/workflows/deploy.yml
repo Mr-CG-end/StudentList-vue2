@@ -29,6 +29,22 @@ jobs:
           cache: "npm"
 
       # 3. 安装依赖
+      - name: 安装依赖
+        run: npm ci
+
+      # 4. 构建项目
+      - name: 构建项目
+        run: npm run build
+
+      # 5. 上传构建产物
+      - name: 上传构建产物
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+  # 部署任务
+  deploy:
+    needs: build
     runs-on: ubuntu-latest
     environment:
       name: github-pages
