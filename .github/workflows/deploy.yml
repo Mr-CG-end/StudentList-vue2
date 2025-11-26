@@ -38,7 +38,7 @@ jobs:
 
       # 5. 上传构建产物
       - name: 上传构建产物
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v3.0.1
         with:
           path: ./dist
 
