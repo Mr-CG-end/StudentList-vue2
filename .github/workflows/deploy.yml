@@ -1,14 +1,19 @@
 name: Deploy to GitHub Pages
 
-# 触发条件: 当推送到 main 分支时自动执行
 on:
   push:
     branches:
       - main
 
+# 设置权限
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 # 任务定义
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -31,10 +36,21 @@ jobs:
       - name: 构建项目
         run: npm run build
 
-      # 5. 部署到 GitHub Pages
-      - name: 部署到 GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      # 5. 上传构建产物
+      - name: 上传构建产物
+        uses: actions/upload-pages-artifact@v2
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
-          publish_branch: gh-pages
+          path: ./dist
+
+  # 部署任务
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: 部署到 GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
