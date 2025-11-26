@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+  # 允许手动触发
+  workflow_dispatch:
 
 # 设置权限
 permissions:
@@ -17,13 +19,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. 检出代码
+      # 1. 检出代码 (升级到 v4)
       - name: Checkout 代码
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      # 2. 设置 Node.js 环境
+      # 2. 设置 Node.js 环境 (升级到 v4)
       - name: 设置 Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: "16"
           cache: "npm"
@@ -36,9 +38,9 @@ jobs:
       - name: 构建项目
         run: npm run build
 
-      # 5. 上传构建产物
+      # 5. 上传构建产物 (使用 v3 最新版)
       - name: 上传构建产物
-        uses: actions/upload-pages-artifact@v3.0.1
+        uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist
 
@@ -51,6 +53,6 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
-      - name: 部署到 GitHub Pages
+      - name: 部署到 GitHub Pages (升级到 v4)
         id: deployment
         uses: actions/deploy-pages@v4
