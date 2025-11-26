@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    // 设置基础路径为当前目录
+    "baseUrl": "./",
+    // 配置路径别名：@ 指向 src 目录
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    // 指定模块解析方式
+    "module": "commonjs",
+    // 允许导入 JSON 文件
+    "resolveJsonModule": true,
+    // 支持 JSX 语法（虽然 Vue 2 主要用 template）
+    "jsx": "preserve"
+  },
+  // 包含的文件范围
+  "include": [
+    "src/**/*"
+  ],
+  // 排除的目录（提升编辑器性能）
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}
