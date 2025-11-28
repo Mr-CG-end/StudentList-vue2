@@ -1,7 +1,7 @@
 <template>
   <div class="dashboard">
     <h1>欢迎进入学生管理系统</h1>
-    <p>这是一个用于学习 Vue 2 基础的项目。</p>
+    <p>这是一个用于学习 Vue 2 基础的项目</p>
   </div>
 </template>
 

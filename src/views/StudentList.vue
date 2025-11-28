@@ -1,10 +1,11 @@
 <template>
   <div class="student-list">
     <div class="actions">
+      <el-input placeholder="请输入搜索内容" prefix-icon="el-icon-search" clearable class="search-input" v-model="searchKeyword"></el-input>
       <el-button type="primary" @click="handleAdd">新增学生</el-button>
     </div>
 
-    <el-table :data="tableData" style="width: 100%; margin-top: 20px;" border>
+    <el-table :data="filteredTableData" style="width: 100%; margin-top: 20px;" border>
       <el-table-column prop="id" label="ID" width="80"></el-table-column>
       <el-table-column prop="name" label="姓名" width="120"></el-table-column>
       <el-table-column prop="age" label="年龄" width="80"></el-table-column>
@@ -54,12 +55,24 @@ export default {
         name: '',
         age: '',
         class: ''
-      }
+      },
+      searchKeyword: ''
     }
   },
   computed: {
     dialogTitle() {
       return this.isEdit ? '编辑学生' : '新增学生'
+    },
+    // 通过搜索关键词过滤后的表格数据
+    filteredTableData() {
+      if (!this.searchKeyword) return this.tableData
+      const keyword = this.searchKeyword.toLowerCase()
+      return this.tableData.filter(
+        (item) =>
+          item.name.toLowerCase().includes(keyword) ||
+          item.class.includes(keyword) ||
+          item.age.toString().includes(keyword)
+      )
     }
   },
   methods: {
@@ -80,19 +93,23 @@ export default {
       // TODO: 调用删除接口，刷新列表
       this.$confirm('确认删除该学生吗?', '提示', {
         type: 'warning'
-      }).then(() => {
-        console.log('Deleting:', row)
-        this.$message.success('删除成功 (模拟)')
-        // 模拟删除
-        this.tableData = this.tableData.filter(item => item.id !== row.id)
-      }).catch(() => {})
+      })
+        .then(() => {
+          console.log('Deleting:', row)
+          this.$message.success('删除成功 (模拟)')
+          // 模拟删除
+          this.tableData = this.tableData.filter((item) => item.id !== row.id)
+        })
+        .catch(() => {})
     },
     handleSave() {
       // TODO: 调用保存/更新接口，关闭弹窗，刷新列表
       console.log('Saving:', this.form)
       if (this.isEdit) {
         // 模拟更新
-        const index = this.tableData.findIndex(item => item.id === this.form.id)
+        const index = this.tableData.findIndex(
+          (item) => item.id === this.form.id
+        )
         if (index !== -1) {
           // Vue 2 数组更新注意事项：splice 是响应式的
           this.tableData.splice(index, 1, { ...this.form })
@@ -100,9 +117,10 @@ export default {
       } else {
         // 模拟新增
         // 学习点：模拟数据库自增 ID
-        const maxId = this.tableData.length > 0 
-          ? Math.max(...this.tableData.map(item => item.id)) 
-          : 0
+        const maxId =
+          this.tableData.length > 0
+            ? Math.max(...this.tableData.map((item) => item.id))
+            : 0
         this.form.id = maxId + 1
         this.tableData.push({ ...this.form })
       }
@@ -116,5 +134,9 @@ export default {
 <style scoped>
 .actions {
   margin-bottom: 20px;
+}
+.search-input {
+  width: 200px;
+  margin-right: 10px;
 }
 </style>

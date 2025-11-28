@@ -12,7 +12,7 @@
         </el-menu-item>
       </el-menu>
     </el-aside>
-    
+
     <el-container>
       <el-header style="text-align: right; font-size: 12px; border-bottom: 1px solid #eee; display: flex; align-items: center; justify-content: flex-end;">
         <el-dropdown>
@@ -23,9 +23,9 @@
             <el-dropdown-item>删除</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
-        <span>王小虎</span>
+        <span>辰冬雪</span>
       </el-header>
-      
+
       <el-main>
         <router-view></router-view>
       </el-main>
