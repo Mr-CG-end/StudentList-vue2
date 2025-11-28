@@ -67,11 +67,9 @@ export default {
     filteredTableData() {
       if (!this.searchKeyword) return this.tableData
       const keyword = this.searchKeyword.toLowerCase()
-      return this.tableData.filter(
-        (item) =>
-          item.name.toLowerCase().includes(keyword) ||
-          item.class.includes(keyword) ||
-          item.age.toString().includes(keyword)
+      return this.tableData.filter((item) =>
+        // 通过 Object.values(item) 获取对象的所有值，然后连接成一个字符串
+        Object.values(item).join('').toLowerCase().includes(keyword)
       )
     }
   },
@@ -96,7 +94,7 @@ export default {
       })
         .then(() => {
           console.log('Deleting:', row)
-          this.$message.success('删除成功 (模拟)')
+          this.$message.success('删除成功')
           // 模拟删除
           this.tableData = this.tableData.filter((item) => item.id !== row.id)
         })
