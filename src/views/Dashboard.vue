@@ -18,6 +18,6 @@ export default {
 }
 h1 {
   font-size: 32px;
-  color: #409EFF;
+  color: #409eff;
 }
 </style>

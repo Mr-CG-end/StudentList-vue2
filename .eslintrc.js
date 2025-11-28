@@ -5,7 +5,8 @@ module.exports = {
   },
   extends: [
     'plugin:vue/essential',
-    'eslint:recommended'
+    'eslint:recommended',
+    'plugin:prettier/recommended'
   ],
   parserOptions: {
     parser: '@babel/eslint-parser'
@@ -13,9 +14,6 @@ module.exports = {
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'vue/multi-word-component-names': 'off',
-    'quotes': 'off',
-    'semi': 'off',
-    'comma-dangle': 'off'
+    'vue/multi-word-component-names': 'off'
   }
 }

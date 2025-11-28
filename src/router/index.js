@@ -8,37 +8,37 @@ import StudentList from '../views/StudentList.vue'
 Vue.use(VueRouter)
 
 const routes = [
-    {
-        path: '/login',
-        name: 'Login',
-        component: Login
-    },
-    {
-        path: '/',
-        component: MainLayout,
-        children: [
-            {
-                path: '',
-                redirect: 'dashboard'
-            },
-            {
-                path: 'dashboard',
-                name: 'Dashboard',
-                component: Dashboard
-            },
-            {
-                path: 'students',
-                name: 'StudentList',
-                component: StudentList
-            }
-        ]
-    }
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
+  },
+  {
+    path: '/',
+    component: MainLayout,
+    children: [
+      {
+        path: '',
+        redirect: 'dashboard'
+      },
+      {
+        path: 'dashboard',
+        name: 'Dashboard',
+        component: Dashboard
+      },
+      {
+        path: 'students',
+        name: 'StudentList',
+        component: StudentList
+      }
+    ]
+  }
 ]
 
 const router = new VueRouter({
-    mode: 'hash',
-    base: process.env.BASE_URL,
-    routes
+  mode: 'hash',
+  base: process.env.BASE_URL,
+  routes
 })
 
 export default router

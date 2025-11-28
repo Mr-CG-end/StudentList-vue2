@@ -1,11 +1,21 @@
 <template>
   <div class="student-list">
     <div class="actions">
-      <el-input placeholder="请输入搜索内容" prefix-icon="el-icon-search" clearable class="search-input" v-model="searchKeyword"></el-input>
+      <el-input
+        placeholder="请输入搜索内容"
+        prefix-icon="el-icon-search"
+        clearable
+        class="search-input"
+        v-model="searchKeyword"
+      ></el-input>
       <el-button type="primary" @click="handleAdd">新增学生</el-button>
     </div>
 
-    <el-table :data="filteredTableData" style="width: 100%; margin-top: 20px;" border>
+    <el-table
+      :data="filteredTableData"
+      style="width: 100%; margin-top: 20px"
+      border
+    >
       <el-table-column prop="id" label="ID" width="80"></el-table-column>
       <el-table-column prop="name" label="姓名" width="120"></el-table-column>
       <el-table-column prop="age" label="年龄" width="80"></el-table-column>
@@ -13,7 +23,9 @@
       <el-table-column label="操作" width="180">
         <template slot-scope="scope">
           <el-button size="mini" @click="handleEdit(scope.row)">编辑</el-button>
-          <el-button size="mini" type="danger" @click="handleDelete(scope.row)">删除</el-button>
+          <el-button size="mini" type="danger" @click="handleDelete(scope.row)">
+            删除
+          </el-button>
         </template>
       </el-table-column>
     </el-table>
